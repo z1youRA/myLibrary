@@ -72,5 +72,11 @@ body {
 .author,
  .pages,
  .status{
-    font-size: 40px;
+    font-size: 30px;
+}
+
+.delete {
+    width: 25px;
+    height: 25px;
+    align-self: flex-end;
 }

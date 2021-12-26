@@ -32,37 +32,50 @@ function addBookToLibrary(title, author, pages, inputStatus) {
 }
 
 function displayBook() {
-    library.innerHTML = '';
-    myLibrary.forEach(bookInLib => {
+    library.innerHTML = ''; //clear the existed book on the page
+    myLibrary.forEach((bookInLib, index) => {
         const book = document.createElement('div');
         const title = document.createElement('div');
         const author = document.createElement('div');
         const pages = document.createElement('div');
         const status = document.createElement('div');
+        const buttonDel = document.createElement('input');
         book.classList.add('card');
+        book.setAttribute('data-key', `${index}`);
         title.textContent = bookInLib.title;
         title.classList.add('title');
-        author.textContent = bookInLib.author;
+        author.textContent = 'author: ' + bookInLib.author;
         author.classList.add('author');
-        pages.textContent = bookInLib.pages;
+        pages.textContent = 'pages: ' + bookInLib.pages;
         pages.classList.add('pages');
-        status.textContent = bookInLib.status;
+        status.textContent = 'status: ' + bookInLib.status;
         status.classList.add('status');
+        buttonDel.type = 'image';
+        buttonDel.src = 'img/bin.png';
+        buttonDel.classList.add('delete');
+        book.appendChild(buttonDel);
         book.appendChild(title);
         book.appendChild(author);
         book.appendChild(pages);
         book.appendChild(status);
         library.appendChild(book);
+        buttonDel.addEventListener('click', () => {
+            myLibrary.splice(book.getAttribute('data-key'), 1);
+            displayBook();
+        })        
     })
 }
-
-let myLibrary = [];
+const book = new Book('a', 'a', 123, 'yes');
+let myLibrary = [book];
+displayBook();
 const titleInput = document.querySelector('.title-input');
 const authorInput = document.querySelector('.author-input');
 const pageInput = document.querySelector('.page-input');
 const statusInput = document.querySelector('.status-input');
 const buttonAdd = document.querySelector('.sidebar button');
+const buttonDel = document.querySelector('.delete');
 buttonAdd.addEventListener('click', ()=>{
     addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.value);
     displayBook();
 })
+
