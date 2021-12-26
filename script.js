@@ -18,6 +18,10 @@ function addBookToLibrary() {
     const pages = prompt(`What's the pages of the book?`);
     const inputStatus = prompt(`Have you read it yet?`);
     let status = 0; // 0 represents NO
+    if(inputStatus === null) {
+        alert("input ERROR!");
+        return Error;
+    }
     if(inputStatus.toLowerCase() === 'yes' || inputStatus.toLowerCase() === 'y' || inputStatus.toLowerCase() === '1')
         status = 1;
     else if(inputStatus.toLowerCase() !== 'no' && inputStatus.toLowerCase() !== 'n' && inputStatus.toLowerCase() !== '0'){
