@@ -1,0 +1,68 @@
+:root {
+    --dark-background-color: #1f2937;
+    --dark-font-color: #f9faf8;
+    --light-font-color: #1f2937;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.head {
+    background-color: var(--dark-background-color);
+    padding: 10px 8px;
+}
+
+.headline {
+    font-size: 36px;
+    color: var(--dark-font-color);
+}
+
+.content {
+    display: flex;
+    flex: auto;
+    height: 100%;
+}
+
+.sidebar button {
+    width: 60px;
+    margin-top: 20px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 100%;
+    background-color: var(--dark-background-color);
+    color: var(--dark-font-color);
+}
+
+.form {
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.card {
+    border: solid; 
+    margin: 8px 30px;   
+}
+
+.title {
+    font-size: 40px;
+}
