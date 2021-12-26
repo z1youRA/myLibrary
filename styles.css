@@ -4,18 +4,15 @@
     --light-font-color: #1f2937;
 }
 
-html {
-    height: 100%;
-}
-
 body {
     margin: 0;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .head {
     background-color: var(--dark-background-color);
     padding: 10px 8px;
+    height: 5vh;
 }
 
 .headline {
@@ -26,7 +23,7 @@ body {
 .content {
     display: flex;
     flex: auto;
-    height: 100%;
+    min-height: 95vh;
 }
 
 .sidebar button {
@@ -36,10 +33,10 @@ body {
 
 .sidebar {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
     align-items: center;
     width: 300px;
-    height: 100%;
     background-color: var(--dark-background-color);
     color: var(--dark-font-color);
 }
@@ -54,15 +51,26 @@ body {
 
 .container {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-wrap: wrap;
 }
+
+
 
 .card {
     border: solid; 
-    margin: 8px 30px;   
+    margin: 16px;   
+    padding: 16px;
+    width: 300px;
+    height: 400px;
 }
 
 .title {
+    font-size: 60px;
+    text-align: center;
+}
+
+.author,
+ .pages,
+ .status{
     font-size: 40px;
 }

@@ -1,3 +1,6 @@
+const library = document.querySelector('.container');
+
+
 function Book(title, author, pages, status) {
     this.title = title;
     this.author = author;
@@ -12,11 +15,7 @@ Book.prototype.info = function() {
         console.log("You have NOT read it");
 }
 
-function addBookToLibrary() {
-    const title = prompt(`What's the title of the book?`);
-    const author = prompt(`What's the author of the book?`);
-    const pages = prompt(`What's the pages of the book?`);
-    const inputStatus = prompt(`Have you read it yet?`);
+function addBookToLibrary(title, author, pages, inputStatus) {
     let status = 0; // 0 represents NO
     if(inputStatus === null) {
         alert("input ERROR!");
@@ -33,7 +32,7 @@ function addBookToLibrary() {
 }
 
 function displayBook() {
-    const library = document.querySelector('.container');
+    library.innerHTML = '';
     myLibrary.forEach(bookInLib => {
         const book = document.createElement('div');
         const title = document.createElement('div');
@@ -57,11 +56,13 @@ function displayBook() {
     })
 }
 
-const book1 = new Book('the odin', 'me', 100, 0);
-const book2 = new Book('the odin', 'me', 100, 0);
-const book3 = new Book('the odin', 'me', 100, 0);
-const book4 = new Book('the odin', 'me', 100, 0);
-const book5 = new Book('the odin', 'me', 100, 0);
-const book6 = new Book('the odin', 'me', 100, 0);
-let myLibrary = [book1, book2, book3, book4, book5, book6];
-displayBook();
+let myLibrary = [];
+const titleInput = document.querySelector('.title-input');
+const authorInput = document.querySelector('.author-input');
+const pageInput = document.querySelector('.page-input');
+const statusInput = document.querySelector('.status-input');
+const buttonAdd = document.querySelector('.sidebar button');
+buttonAdd.addEventListener('click', ()=>{
+    addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.value);
+    displayBook();
+})
