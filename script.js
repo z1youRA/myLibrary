@@ -8,6 +8,20 @@ function Book(title, author, pages, status) {
     this.status = status;
 }
 
+function addSlider(status) {
+    const buttonStatus = document.createElement('label');
+    const checkbox = document.createElement('input');
+    const slider = document.createElement('span');
+    buttonStatus.classList.add('switch');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.classList.add('status-edit');
+    checkbox.checked = status;
+    slider.classList.add('slider', 'round');
+    buttonStatus.appendChild(checkbox);
+    buttonStatus.appendChild(slider);
+    return buttonStatus;
+}
+
 Book.prototype.info = function() {
     if(this.status === 1)
         console.log("You have read it!");
@@ -16,18 +30,7 @@ Book.prototype.info = function() {
 }
 
 function addBookToLibrary(title, author, pages, inputStatus) {
-    let status = 0; // 0 represents NO
-    if(inputStatus === null) {
-        alert("input ERROR!");
-        return Error;
-    }
-    if(inputStatus.toLowerCase() === 'yes' || inputStatus.toLowerCase() === 'y' || inputStatus.toLowerCase() === '1')
-        status = 1;
-    else if(inputStatus.toLowerCase() !== 'no' && inputStatus.toLowerCase() !== 'n' && inputStatus.toLowerCase() !== '0'){
-        alert("input ERROR!");
-        return Error;
-    }
-    const newBook = new Book(title, author, pages, status);
+    const newBook = new Book(title, author, pages, inputStatus);
     myLibrary.push(newBook);
 }
 
@@ -38,8 +41,8 @@ function displayBook() {
         const title = document.createElement('div');
         const author = document.createElement('div');
         const pages = document.createElement('div');
-        const status = document.createElement('div');
         const buttonDel = document.createElement('input');
+        const buttonStatus = addSlider(bookInLib.status);
         book.classList.add('card');
         book.setAttribute('data-key', `${index}`);
         title.textContent = bookInLib.title;
@@ -48,8 +51,6 @@ function displayBook() {
         author.classList.add('author');
         pages.textContent = 'pages: ' + bookInLib.pages;
         pages.classList.add('pages');
-        status.textContent = 'status: ' + bookInLib.status;
-        status.classList.add('status');
         buttonDel.type = 'image';
         buttonDel.src = 'img/bin.png';
         buttonDel.classList.add('delete');
@@ -57,15 +58,20 @@ function displayBook() {
         book.appendChild(title);
         book.appendChild(author);
         book.appendChild(pages);
-        book.appendChild(status);
+        book.appendChild(buttonStatus);
         library.appendChild(book);
         buttonDel.addEventListener('click', () => {
             myLibrary.splice(book.getAttribute('data-key'), 1);
             displayBook();
-        })        
+        });
+        buttonStatus.addEventListener('click', (e) => {
+            if(e.pointerId == -1) { // two events were triggered when only one click happended, so we need to get the one targeted to checkbox.
+                myLibrary[book.getAttribute('data-key')].status = e.target.checked;
+            }
+        })
     })
 }
-const book = new Book('a', 'a', 123, 'yes');
+const book = new Book('a', 'a', 123, true);
 let myLibrary = [book];
 displayBook();
 const titleInput = document.querySelector('.title-input');
@@ -75,7 +81,8 @@ const statusInput = document.querySelector('.status-input');
 const buttonAdd = document.querySelector('.sidebar button');
 const buttonDel = document.querySelector('.delete');
 buttonAdd.addEventListener('click', ()=>{
-    addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.value);
+    addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.checked);
     displayBook();
 })
+
 
