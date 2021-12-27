@@ -26,20 +26,58 @@ body {
     min-height: 95vh;
 }
 
-.sidebar button {
-    width: 60px;
-    margin-top: 20px;
+.sidenav {
+  display: flex;
+  align-items: center;
+}
+
+.bar-button {
+  width: 20px;
+  height: auto;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.add-button {
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: var(--dark-font-color);
+  width: 70px;
+  margin-top: 20px;
+}
+
+.add-button:hover {
+  background-color:gainsboro;
+  cursor: pointer;
 }
 
 .sidebar {
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
+    align-self: stretch;
     align-items: center;
     width: 300px;
     background-color: var(--dark-background-color);
     color: var(--dark-font-color);
+    transition-duration: 0.5s;
 }
+
+.sidebar.collapse {
+  width: 0;
+}
+
+.sidebar.collapse .title-input,
+.sidebar.collapse .author-input,
+.sidebar.collapse .page-input,
+.sidebar.collapse .status-input,
+.sidebar.collapse .slider ,
+.sidebar.collapse .add-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
 
 .form {
     padding: 5px 20px;
@@ -90,10 +128,11 @@ body {
     align-self: flex-end;
 }
 
+
 /* The switch - the box around the slider */
 .card .switch {
     align-self: center;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 .switch {
     position: relative;
