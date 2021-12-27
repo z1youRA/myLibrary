@@ -30,6 +30,10 @@ Book.prototype.info = function() {
 }
 
 function addBookToLibrary(title, author, pages, inputStatus) {
+    if(title === '' || author === '' || pages === '') {
+        alert('MISSING INFO, try again.');
+        return;
+    }
     const newBook = new Book(title, author, pages, inputStatus);
     myLibrary.push(newBook);
 }
@@ -37,6 +41,8 @@ function addBookToLibrary(title, author, pages, inputStatus) {
 function displayBook() {
     library.innerHTML = ''; //clear the existed book on the page
     myLibrary.forEach((bookInLib, index) => {
+        const cardInfo = document.createElement('div');
+        cardInfo.classList.add('card-info');
         const book = document.createElement('div');
         const title = document.createElement('div');
         const author = document.createElement('div');
@@ -55,10 +61,11 @@ function displayBook() {
         buttonDel.src = 'img/bin.png';
         buttonDel.classList.add('delete');
         book.appendChild(buttonDel);
-        book.appendChild(title);
-        book.appendChild(author);
-        book.appendChild(pages);
-        book.appendChild(buttonStatus);
+        cardInfo.appendChild(title);
+        cardInfo.appendChild(author);
+        cardInfo.appendChild(pages);
+        cardInfo.appendChild(buttonStatus);
+        book.appendChild(cardInfo);
         library.appendChild(book);
         buttonDel.addEventListener('click', () => {
             myLibrary.splice(book.getAttribute('data-key'), 1);
