@@ -1,11 +1,20 @@
 const library = document.querySelector('.container');
 
 
-function Book(title, author, pages, status) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
+class Book{
+    constructor(title, author, pages, status) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
+    }
+
+    info() {
+        if(this.status === 1)
+            console.log("You have read it!");
+        else if(this.status === 0) 
+            console.log("You have NOT read it");
+    }
 }
 
 function addSlider(status) {
@@ -20,13 +29,6 @@ function addSlider(status) {
     buttonStatus.appendChild(checkbox);
     buttonStatus.appendChild(slider);
     return buttonStatus;
-}
-
-Book.prototype.info = function() {
-    if(this.status === 1)
-        console.log("You have read it!");
-    else if(this.status === 0) 
-        console.log("You have NOT read it");
 }
 
 function addBookToLibrary(title, author, pages, inputStatus) {
