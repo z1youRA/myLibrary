@@ -30,10 +30,6 @@ Book.prototype.info = function() {
 }
 
 function addBookToLibrary(title, author, pages, inputStatus) {
-    if(title === '' || author === '' || pages === '') {
-        alert('MISSING INFO, try again.');
-        return;
-    }
     const newBook = new Book(title, author, pages, inputStatus);
     myLibrary.push(newBook);
 }
@@ -102,6 +98,7 @@ const buttonDel = document.querySelector('.delete');
 const barButton = document.querySelector('.bar-button')
 
 buttonAdd.addEventListener('click', ()=>{
+    if(titleInput.checkValidity() && authorInput.checkValidity() && pageInput.checkValidity())
     addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.checked);
     displayBook();
 })
