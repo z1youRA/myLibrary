@@ -98,9 +98,15 @@ const buttonDel = document.querySelector('.delete');
 const barButton = document.querySelector('.bar-button')
 
 buttonAdd.addEventListener('click', ()=>{
-    if(titleInput.checkValidity() && authorInput.checkValidity() && pageInput.checkValidity())
-    addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.checked);
-    displayBook();
+    const validMessage = document.getElementById("valid-message");
+    if(titleInput.checkValidity() && authorInput.checkValidity() && pageInput.checkValidity()) {
+        addBookToLibrary(titleInput.value, authorInput.value, pageInput.value, statusInput.checked);
+        displayBook();
+        validMessage.textContent = "";
+    }
+    else {
+        validMessage.textContent = "Form missing information";
+    }
 })
 
 barButton.addEventListener('click', nav);
